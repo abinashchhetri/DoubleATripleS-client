@@ -20,6 +20,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const books = [
   {
@@ -96,6 +97,7 @@ export default function AllBooks() {
   const [bookType, setBookType] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const filteredBooks = books
     .filter(
@@ -186,6 +188,7 @@ export default function AllBooks() {
         {filteredBooks.map((book, index) => (
           <Card
             key={`${book.id}-${index}`}
+            onClick={() => navigate(`/books/${book.id}`)}
             className="rounded-2xl shadow-md border w-full sm:w-[200px] md:w-[250px] lg:w-[280px] hover:shadow-lg transition duration-300 height-[400px]"
           >
             <img

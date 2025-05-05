@@ -4,6 +4,9 @@ import MainLayout from "../components/Mainlayout";
 import { About, Home, Login, Signup } from "../pages";
 import { Contact } from "lucide-react";
 import AllBooks from "../pages/AllBooks";
+import AllCategories from '../pages/admin/AllCategories';
+import CreateCategory from '../pages/admin/CreateCategory';
+import EditCategory from '../pages/admin/EditCategory';
 
 const AppRouter = () => {
   return (

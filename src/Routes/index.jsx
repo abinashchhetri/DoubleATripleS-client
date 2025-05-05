@@ -7,6 +7,15 @@ import AllBooks from "../pages/AllBooks";
 import AllCategories from '../pages/admin/AllCategories';
 import CreateCategory from '../pages/admin/CreateCategory';
 import EditCategory from '../pages/admin/EditCategory';
+import AdminLayout from "../components/admin/AdminLayout";
+
+import Order from "../pages/admin/Order";
+import User from "../pages/admin/User";
+import Dashboard from "../pages/admin/Dashboard";
+import Book from "../pages/admin/Book";
+import Announcement from "../pages/admin/Announcement";
+
+import BookDetails from "../pages/BookDetails";
 
 const AppRouter = () => {
   return (
@@ -18,6 +27,15 @@ const AppRouter = () => {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="books" element={<AllBooks />} />
+        <Route path="books/:id" element={<BookDetails />} />
+      </Route>
+
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard/>} />
+        <Route path="books" element={<Book/>} />
+        <Route path="users" element={<User/>} />
+        <Route path="announcements" element={<Announcement/>} />
+        <Route path="orders" element= {<Order/>}/>
       </Route>
 
       <Route 

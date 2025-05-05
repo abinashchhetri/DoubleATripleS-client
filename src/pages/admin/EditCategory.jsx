@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const CreateCategory = () => {
+const EditCategory = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    // In a real app, fetch the category data
+    // const fetchCategory = async () => {
+    //   try {
+    //     const response = await axios.get(`/api/categories/${id}`);
+    //     setName(response.data.name);
+    //     setDescription(response.data.description);
+    //   } catch (err) {
+    //     setError('Failed to load category');
+    //   }
+    // };
+    // fetchCategory();
+
+    // For demo, use dummy data
+    const dummyCategory = {
+      id: 1,
+      name: 'Fiction',
+      description: 'Novels and fictional stories'
+    };
+    setName(dummyCategory.name);
+    setDescription(dummyCategory.description);
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,26 +41,18 @@ const CreateCategory = () => {
     }
 
     try {
-      // In a real app, you would call your API here
-      // await axios.post('/api/categories', { name, description });
-      
-      // For demo purposes
-      console.log('Creating category:', { name, description });
-      setSuccess('Category created successfully!');
-      setName('');
-      setDescription('');
-      setError('');
-      
-      // Redirect after 2 seconds
+      // In a real app: await axios.put(`/api/categories/${id}`, { name, description });
+      console.log('Updating category:', { id, name, description });
+      setSuccess('Category updated successfully!');
       setTimeout(() => navigate('/admin/categories'), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to create category');
+      setError(err.response?.data?.message || 'Failed to update category');
     }
   };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Create New Category</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Edit Category</h2>
       
       {error && <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">{error}</div>}
       {success && <div className="mb-4 p-2 bg-green-100 text-green-700 rounded">{success}</div>}
@@ -81,7 +97,7 @@ const CreateCategory = () => {
             type="submit"
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
-            Create Category
+            Update Category
           </button>
         </div>
       </form>
@@ -89,4 +105,4 @@ const CreateCategory = () => {
   );
 };
 
-export default CreateCategory;
+export default EditCategory;

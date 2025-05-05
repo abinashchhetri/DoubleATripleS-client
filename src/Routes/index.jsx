@@ -6,6 +6,10 @@ import { Contact } from "lucide-react";
 import AllBooks from "../pages/AllBooks";
 import AdminLayout from "../components/admin/AdminLayout";
 import BookDetails from "../pages/BookDetails";
+import Checkout from "../pages/Checkout";
+import Cart from "../pages/Cart";
+import MyOrders from "../pages/MyOrders";
+import MyFavorites from "../pages/MyFavorites";
 
 const AppRouter = () => {
   return (
@@ -18,6 +22,10 @@ const AppRouter = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="books" element={<AllBooks />} />
         <Route path="books/:id" element={<BookDetails />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="my-orders" element={<MyOrders />} />
+        <Route path="favorites" element={<MyFavorites />} />
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>

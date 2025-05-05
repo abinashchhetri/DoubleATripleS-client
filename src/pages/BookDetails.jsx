@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { Heart, ShoppingCart, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // Example data
 const book = {
@@ -22,6 +23,8 @@ const book = {
 };
 
 export default function BookDetails() {
+  const navigate = useNavigate();
+
   return (
     <div className="max-w-[1200px] mx-auto flex items-center justify-between  mt-14 ">
       {/* Book Cover */}
@@ -71,7 +74,7 @@ export default function BookDetails() {
           <Button variant="secondary">
             <ShoppingCart className="w-4 h-4 mr-2" /> Add to Cart
           </Button>
-          <Button>
+          <Button onClick={() => navigate("/checkout")}>
             <Zap className="w-4 h-4 mr-2" /> Order Now
           </Button>
         </div>

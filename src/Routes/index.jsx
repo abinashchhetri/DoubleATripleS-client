@@ -5,6 +5,10 @@ import { About, Home, Login, Signup } from "../pages";
 import { Contact } from "lucide-react";
 import AllBooks from "../pages/AllBooks";
 import AdminLayout from "../components/admin/AdminLayout";
+
+import Order from "../pages/admin/Order";
+import User from "../pages/admin/User";
+
 import BookDetails from "../pages/BookDetails";
 
 const AppRouter = () => {
@@ -23,9 +27,9 @@ const AppRouter = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<h1>Admin Dashboard</h1>} />
         <Route path="books" element={<h1>Admin Books</h1>} />
-        <Route path="users" element={<h1>Admin Users</h1>} />
+        <Route path="users" element={<User/>} />
         <Route path="announcements" element={<h1>Admin Announcements</h1>} />
-        <Route path="orders" element={<h1>Admin Orders</h1>} />
+        <Route path="orders" element= {<Order/>}/>
       </Route>
     </Routes>
   );

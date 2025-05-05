@@ -4,45 +4,29 @@ const Sidebar = () => {
   const menuItems = [
     { name: "Dashboard", path: "/admin" },
     { name: "Books", path: "/admin/books" },
-
-    {
-      name: "Users",
-      path: "/admin/users",
-      //   icon: assets.person_tick_icon,
-    },
-    {
-      name: "Announcements",
-      path: "/admin/announcements",
-      //   icon: assets.person_tick_icon,
-    },
-    {
-        name: "Orders",
-        path: "/admin/orders",
-        //   icon: assets.person_tick_icon,
-      },
+    { name: "Users", path: "/admin/users" },
+    { name: "Announcements", path: "/admin/announcements" },
+    { name: "Orders", path: "/admin/orders" },
   ];
 
   return (
-    <div className="md:w-64 w-16 border-r min-h-screen text-base border-gray-500 py-2 flex flex-col">
-      {menuItems.map((item, index) => {
-        return (
-          <NavLink
-            key={index}
-            to={item.path}
-            end={item.path === "/educator"}
-            className={({ isActive }) =>
-              `flex items-center md:flex-row flex-col md:justify-start justify-center py-3.5 md:px-10 gap-3 ${
-                isActive
-                  ? "bg-indigo-50 border-r-[6px] border-indigo-500/90"
-                  : "hover:bg-gray-100/90 border-r-[6px] border-white hover:border-gray-100/90 hover:transition-all duration-300"
-              }  `
-            }
-          >
-            {/* <img src={item.icon} className="w-6 h-6" /> */}
-            <p className="md:block hidden text-center">{item.name}</p>
-          </NavLink>
-        );
-      })}
+    <div className="md:w-64 w-16 border-r min-h-screen bg-white shadow-lg py-4 px-2 flex flex-col gap-1">
+      {menuItems.map((item, index) => (
+        <NavLink
+          key={index}
+          to={item.path}
+          end={item.path === "/admin"}
+          className={({ isActive }) =>
+            `group flex items-center md:flex-row flex-col md:justify-start justify-center py-3.5 px-3 rounded-lg transition-all duration-300 ${
+              isActive
+                ? "bg-[#E6E7FD] text-[#636AE8] font-semibold  border-[#636AE8]"
+                : "text-gray-600 hover:bg-gray-100 hover:text-[#636AE8]"
+            }`
+          }
+        >
+          <p className="md:block hidden">{item.name}</p>
+        </NavLink>
+      ))}
     </div>
   );
 };

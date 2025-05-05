@@ -7,6 +7,9 @@ import AllBooks from "../pages/AllBooks";
 import AdminLayout from "../components/admin/AdminLayout";
 import Order from "../pages/admin/Order";
 import User from "../pages/admin/User";
+import Dashboard from "../pages/admin/Dashboard";
+import Book from "../pages/admin/Book";
+import Announcement from "../pages/admin/Announcement";
 
 const AppRouter = () => {
   return (
@@ -21,10 +24,10 @@ const AppRouter = () => {
       </Route>
 
       <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<h1>Admin Dashboard</h1>} />
-        <Route path="books" element={<h1>Admin Books</h1>} />
+        <Route index element={<Dashboard/>} />
+        <Route path="books" element={<Book/>} />
         <Route path="users" element={<User/>} />
-        <Route path="announcements" element={<h1>Admin Announcements</h1>} />
+        <Route path="announcements" element={<Announcement/>} />
         <Route path="orders" element= {<Order/>}/>
       </Route>
     </Routes>

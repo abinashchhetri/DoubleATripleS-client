@@ -21,6 +21,9 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
+// Image imports
+import { assets } from '../assets/assets';
+
 const books = [
   {
     id: 1,
@@ -29,8 +32,7 @@ const books = [
     price: 29,
     type: "Fiction",
     date: new Date(2023, 4, 10),
-    thumbnail:
-      "https://img.freepik.com/free-vector/books-stack-realistic_1284-4735.jpg?t=st=1746350976~exp=1746354576~hmac=a171c168ec2119142baa514e0dec5decfea5c1e39713622f7c8548a6a9f0ed39&w=740",
+    thumbnail: assets.atomic,
     rating: 4.5,
   },
   {
@@ -40,8 +42,7 @@ const books = [
     price: 49,
     type: "Non-Fiction",
     date: new Date(2024, 2, 15),
-    thumbnail:
-      "https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg?t=st=1746351007~exp=1746354607~hmac=b72693b3b67833e6ea247e2d142425c1ba46dce839875efc841edf44378bc8ec&w=996",
+    thumbnail: assets.becoming,
     rating: 4.0,
   },
   {
@@ -51,8 +52,7 @@ const books = [
     price: 19,
     type: "Fiction",
     date: new Date(2022, 7, 5),
-    thumbnail:
-      "https://img.freepik.com/free-vector/stack-colorful-books_74855-314.jpg?t=st=1746351038~exp=1746354638~hmac=8615d8de1ec0db52782c7ca5b3e002880a6e248c7bd0b7bb5608b592ca5418b4&w=740",
+    thumbnail: assets.educated,
     rating: 4.8,
   },
   {
@@ -62,8 +62,7 @@ const books = [
     price: 39,
     type: "Non-Fiction",
     date: new Date(2021, 10, 20),
-    thumbnail:
-      "https://img.freepik.com/free-vector/stack-colorful-books_74855-314.jpg?t=st=1746351038~exp=1746354638~hmac=8615d8de1ec0db52782c7ca5b3e002880a6e248c7bd0b7bb5608b592ca5418b4&w=740",
+    thumbnail: assets.power,
     rating: 4.2,
   },
   {
@@ -73,21 +72,10 @@ const books = [
     price: 59,
     type: "Non-Fiction",
     date: new Date(2020, 1, 12),
-    thumbnail:
-      "https://img.freepik.com/free-vector/stack-colorful-books_74855-314.jpg?t=st=1746351038~exp=1746354638~hmac=8615d8de1ec0db52782c7ca5b3e002880a6e248c7bd0b7bb5608b592ca5418b4&w=740",
+    thumbnail: assets.sapiens,
     rating: 4.7,
   },
-  {
-    id: 6,
-    title: "Fantasy Realm",
-    author: "Eliza Magic",
-    price: 24,
-    type: "Fiction",
-    date: new Date(2023, 8, 14),
-    thumbnail:
-      "https://img.freepik.com/free-vector/stack-colorful-books_74855-314.jpg?t=st=1746351038~exp=1746354638~hmac=8615d8de1ec0db52782c7ca5b3e002880a6e248c7bd0b7bb5608b592ca5418b4&w=740",
-    rating: 4.3,
-  },
+  
 ];
 
 export default function AllBooks() {
@@ -117,7 +105,7 @@ export default function AllBooks() {
     });
 
   return (
-    <div className="flex gap-4 p-6  max-w-[1540px] mx-auto w-full ">
+    <div className="flex gap-4 p-6 max-w-[1540px] mx-auto w-full">
       {/* Sidebar */}
       <div className="md:col-span-1 space-y-4 max-w-[300px] gap-4 flex flex-col">
         <div>
@@ -182,7 +170,7 @@ export default function AllBooks() {
       </div>
 
       {/* Book Cards */}
-      <div className="flex flex-wrap justify-center gap-4 w-full ">
+      <div className="flex flex-wrap justify-center gap-4 w-full">
         {filteredBooks.map((book, index) => (
           <Card
             key={`${book.id}-${index}`}
@@ -191,13 +179,11 @@ export default function AllBooks() {
             <img
               src={book.thumbnail}
               alt={book.title}
-              className="w-full  object-cover rounded-t-2xl"
+              className="w-full object-cover rounded-t-2xl"
             />
             <CardContent className="p-4">
               <h3 className="text-lg font-semibold">{book.title}</h3>
-              <p className="text-sm text-muted-foreground mb-1">
-                ${book.price}
-              </p>
+              <p className="text-sm text-muted-foreground mb-1">${book.price}</p>
               <p className="text-sm text-gray-700">{book.type}</p>
               <p className="text-sm text-gray-600">By {book.author}</p>
               <div className="flex items-center gap-1 my-1">
@@ -228,7 +214,7 @@ export default function AllBooks() {
           </Card>
         ))}
 
-        <Pagination>
+        {/* <Pagination>
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious href="#" />
@@ -243,7 +229,7 @@ export default function AllBooks() {
               <PaginationNext href="#" />
             </PaginationItem>
           </PaginationContent>
-        </Pagination>
+        </Pagination> */}
       </div>
     </div>
   );

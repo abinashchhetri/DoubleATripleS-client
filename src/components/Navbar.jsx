@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
 import { assets } from "../assets/assets"; // Adjust path if needed
 
 const Navbar = () => {
@@ -53,17 +54,24 @@ const Navbar = () => {
         </div>
 
         {/* Create Account Button */}
-        {!isAccountCreated && (
-          <div>
-            <Link
-              to="/signup"
-              onClick={handleCreateAccountClick}
-              className="border border-[#636AE8] text-[#636AE8] px-6 py-3 rounded-xl hover:bg-[#636AE8] hover:text-white transition duration-300 text-lg"
-            >
-              Create Account
-            </Link>
-          </div>
-        )}
+
+        <div className="flex items-center gap-12">
+          <NavLink to={"/cart"}>
+            <FaCartPlus size={25} color="#636AE8" />
+          </NavLink>
+
+          {!isAccountCreated && (
+            <div>
+              <Link
+                to="/signup"
+                onClick={handleCreateAccountClick}
+                className="border border-[#636AE8] text-[#636AE8] px-6 py-3 rounded-xl hover:bg-[#636AE8] hover:text-white transition duration-300 text-lg"
+              >
+                Create Account
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

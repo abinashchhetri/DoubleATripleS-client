@@ -23,6 +23,7 @@ const AppRouter = () => {
         <Route path="books" element={<h1>Admin Books</h1>} />
         <Route path="users" element={<h1>Admin Users</h1>} />
         <Route path="announcements" element={<h1>Admin Announcements</h1>} />
+        <Route path="orders" element={<h1>Admin Orders</h1>} />
       </Route>
     </Routes>
   );

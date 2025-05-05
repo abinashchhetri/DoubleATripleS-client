@@ -12,7 +12,7 @@ const Navbar = () => {
   if (isAccountCreated) return null; // Hide the navbar after clicking the "Create Account" button
 
   return (
-    <div className="">
+    <div className="max-w-[1400px] mx-auto bg-white mt-4">
       {/* Logo and Navbar */}
       <div className="flex items-center justify-between p-5">
         {/* Logo */}

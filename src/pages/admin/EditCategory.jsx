@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditCategory = () => {
@@ -9,20 +9,8 @@ const EditCategory = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    // In a real app, fetch the category data
-    // const fetchCategory = async () => {
-    //   try {
-    //     const response = await axios.get(`/api/categories/${id}`);
-    //     setName(response.data.name);
-    //     setDescription(response.data.description);
-    //   } catch (err) {
-    //     setError('Failed to load category');
-    //   }
-    // };
-    // fetchCategory();
-
-    // For demo, use dummy data
+  // Initialize with dummy data
+  useState(() => {
     const dummyCategory = {
       id: 1,
       name: 'Fiction',
@@ -32,7 +20,7 @@ const EditCategory = () => {
     setDescription(dummyCategory.description);
   }, [id]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (!name.trim()) {
@@ -40,14 +28,10 @@ const EditCategory = () => {
       return;
     }
 
-    try {
-      // In a real app: await axios.put(`/api/categories/${id}`, { name, description });
-      console.log('Updating category:', { id, name, description });
-      setSuccess('Category updated successfully!');
-      setTimeout(() => navigate('/admin/categories'), 2000);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to update category');
-    }
+    // In a real app, this would be an API call
+    console.log('Updating dummy category:', { id, name, description });
+    setSuccess('Category updated successfully! (Dummy data)');
+    setTimeout(() => navigate('/categories'), 2000);
   };
 
   return (
@@ -88,7 +72,7 @@ const EditCategory = () => {
         <div className="flex justify-end">
           <button
             type="button"
-            onClick={() => navigate('/admin/categories')}
+            onClick={() => navigate('/categories')}
             className="mr-2 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
           >
             Cancel

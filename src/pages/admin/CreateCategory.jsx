@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const CreateCategory = () => {
+const CreateCategory = ({ addCategory }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (!name.trim()) {
@@ -16,22 +16,21 @@ const CreateCategory = () => {
       return;
     }
 
-    try {
-      // In a real app, you would call your API here
-      // await axios.post('/api/categories', { name, description });
-      
-      // For demo purposes
-      console.log('Creating category:', { name, description });
-      setSuccess('Category created successfully!');
-      setName('');
-      setDescription('');
-      setError('');
-      
-      // Redirect after 2 seconds
-      setTimeout(() => navigate('/admin/categories'), 2000);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to create category');
-    }
+    // In a real app, this would be an API call
+    const newCategory = {
+      id: Math.floor(Math.random() * 10000), // Generate random ID for dummy data
+      name,
+      description
+    };
+    
+    console.log('Creating dummy category:', newCategory);
+    setSuccess('Category created successfully! (Dummy data)');
+    setName('');
+    setDescription('');
+    setError('');
+    
+    // Redirect after 2 seconds
+    setTimeout(() => navigate('/categories'), 2000);
   };
 
   return (
@@ -72,7 +71,7 @@ const CreateCategory = () => {
         <div className="flex justify-end">
           <button
             type="button"
-            onClick={() => navigate('/admin/categories')}
+            onClick={() => navigate('/categories')}
             className="mr-2 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
           >
             Cancel

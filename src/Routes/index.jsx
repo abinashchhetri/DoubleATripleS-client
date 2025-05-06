@@ -45,7 +45,26 @@ const AppRouter = () => {
         <Route path="announcements" element={<Announcement/>} />
         <Route path="orders" element= {<Order/>}/>
       </Route>
+
+      <Route 
+        // path="/admin" 
+        // element={
+        //   <PrivateRoute roles={['Admin']}>
+        //     <AdminLayout />
+        //   </PrivateRoute>
+        // }
+      >
+
+      {/* Category Management Routes */}
+      <Route path="categories" element={<AllCategories />} />
+        <Route path="categories/create" element={<CreateCategory />} />
+        <Route path="categories/edit/:id" element={<EditCategory />} />
+      </Route>
+
     </Routes>
+
+    
+
   );
 };
 

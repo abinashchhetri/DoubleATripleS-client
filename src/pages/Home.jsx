@@ -75,7 +75,7 @@ const Home = () => {
               },
               
               {
-                name: "Smirti",
+                name: "Smriti",
                 quote: "I’ve gifted so many books from here. Great for book lovers!",
               },
               {

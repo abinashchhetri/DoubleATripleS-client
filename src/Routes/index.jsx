@@ -21,6 +21,7 @@ import Cart from "../pages/Cart";
 import MyOrders from "../pages/MyOrders";
 import MyFavorites from "../pages/MyFavorites";
 
+
 const AppRouter = () => {
   return (
     <Routes>
@@ -38,12 +39,14 @@ const AppRouter = () => {
         <Route path="favorites" element={<MyFavorites />} />
       </Route>
 
+     
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard/>} />
         <Route path="books" element={<Book/>} />
         <Route path="users" element={<User/>} />
         <Route path="announcements" element={<Announcement/>} />
         <Route path="orders" element= {<Order/>}/>
+       
       </Route>
 
       <Route 

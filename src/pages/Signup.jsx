@@ -21,7 +21,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://localhost:7046/api/Auth/register', formData, {
+      const res = await axios.post('https://localhost:7163/api/Auth/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -83,18 +83,7 @@ const Signup = () => {
           </div>
 
           {/* Role */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Role:</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full px-4 py-3 text-sm bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#636AE8] transition"
-            >
-              <option value="Member">Member</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </div>
+          
           <div className="flex items-start text-sm">
             <input
               type="checkbox"

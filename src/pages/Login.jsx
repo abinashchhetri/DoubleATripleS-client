@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios"; // Import Axios for making HTTP requests
-import { toast } from "react-toastify"; // Import Toastify for notifications
-import { useNavigate } from "react-router-dom"; // For redirecting after login
-import { assets } from "../assets/assets"; // adjust the path as needed
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
-    passwordHash: "",
+    password: "",
   });
-  const navigate = useNavigate(); // To navigate after successful login
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,25 +17,50 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await login(formData.email, formData.password);
+  };
+
+  const login = async (email, password) => {
     try {
-      const res = await axios.post("https://localhost:7046/api/auth/login", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await axios.post(
+        "https://localhost:7163/api/auth/login", // Backend login endpoint
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      // If login is successful, store the token (you can use localStorage or sessionStorage)
+      // Store JWT token in localStorage
       localStorage.setItem("token", res.data.token);
-
-      // Show success message
       toast.success("Login successful!");
-
-      // Redirect to home page or dashboard
-      navigate("/"); // Replace with the route you want after login
+      
+      // Redirect based on role
+      if (res.data.token) {
+        const decodedToken = decodeJwt(res.data.token); // Function to decode JWT
+        if (decodedToken.role === "Admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }
     } catch (err) {
-      // Show error message
       toast.error(err.response?.data || "Login failed");
     }
+  };
+
+  // Decode JWT (basic version)
+  const decodeJwt = (token) => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => `%${("00" + c.charCodeAt(0).toString(16)).slice(-2)}`)
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
   };
 
   return (
@@ -60,10 +85,10 @@ const Login = () => {
               <label className="block font-semibold mb-1">Password</label>
               <input
                 type="password"
-                name="passwordHash"
-                value={formData.passwordHash}
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
-                placeholder="Enter at least 6+ characters"
+                placeholder="Enter your password"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
             </div>
@@ -75,7 +100,7 @@ const Login = () => {
             </button>
           </form>
           <p className="mt-6 text-sm">
-            Don't Have an account?{" "}
+            Don't have an account?{" "}
             <a href="/signup" className="text-indigo-600 font-medium hover:underline">
               Sign up
             </a>

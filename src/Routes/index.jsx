@@ -14,6 +14,7 @@ import Announcement from "../pages/admin/Announcement";
 
 import BookDetails from "../pages/BookDetails";
 
+
 const AppRouter = () => {
   return (
     <Routes>
@@ -27,12 +28,14 @@ const AppRouter = () => {
         <Route path="books/:id" element={<BookDetails />} />
       </Route>
 
+     
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard/>} />
         <Route path="books" element={<Book/>} />
         <Route path="users" element={<User/>} />
         <Route path="announcements" element={<Announcement/>} />
         <Route path="orders" element= {<Order/>}/>
+       
       </Route>
     </Routes>
   );

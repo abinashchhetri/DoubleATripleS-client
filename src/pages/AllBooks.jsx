@@ -9,21 +9,9 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { Navigate, useNavigate } from "react-router-dom";
-
-// Image imports
-import { assets } from '../assets/assets';
+import { useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const books = [
   {
@@ -76,7 +64,40 @@ const books = [
     thumbnail: assets.sapiens,
     rating: 4.7,
   },
-  
+  {
+    id: 6,
+    title: "History of Time",
+    author: "Dr. Chronos",
+    price: 59,
+    type: "Non-Fiction",
+    date: new Date(2020, 1, 12),
+    thumbnail: assets.sapiens,
+    rating: 4.7,
+  },
+  {
+    id: 7,
+    title: "History of Time",
+    author: "Dr. Chronos",
+    price: 59,
+    type: "Non-Fiction",
+    date: new Date(2020, 1, 12),
+    thumbnail: assets.sapiens,
+    rating: 4.7,
+  },
+  {
+    id: 8,
+    title: "History of Time",
+    author: "Dr. Chronos",
+    price: 59,
+    type: "Non-Fiction",
+    date: new Date(2020, 1, 12),
+    thumbnail: assets.sapiens,
+    rating: 4.7,
+  },
+
+
+
+
 ];
 
 export default function AllBooks() {
@@ -94,8 +115,7 @@ export default function AllBooks() {
         book.price <= priceRange[1] &&
         (!bookType || book.type === bookType) &&
         (!selectedDate ||
-          format(book.date, "yyyy-MM-dd") ===
-            format(selectedDate, "yyyy-MM-dd")) &&
+          format(book.date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd")) &&
         book.title.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) => {
@@ -107,9 +127,9 @@ export default function AllBooks() {
     });
 
   return (
-    <div className="flex gap-4 p-6 max-w-[1540px] mx-auto w-full">
+    <div className="flex flex-col md:flex-row gap-6 p-6 max-w-screen-xl mx-auto">
       {/* Sidebar */}
-      <div className="md:col-span-1 space-y-4 max-w-[300px] gap-4 flex flex-col">
+      <aside className="md:w-[260px] flex flex-col gap-6">
         <div>
           <h2 className="text-lg font-semibold mb-2">Search</h2>
           <Input
@@ -128,23 +148,14 @@ export default function AllBooks() {
             step={1}
             onValueChange={(val) => setPriceRange(val)}
           />
-          <p className="text-sm mt-2">
-            From ${priceRange[0]} to ${priceRange[1]}
+          <p className="text-sm mt-2 text-muted-foreground">
+            NPR {priceRange[0]} - NPR {priceRange[1]}
           </p>
         </div>
 
         <div>
-          <h2 className="text-lg font-semibold mb-2">Published Date</h2>
-          <Calendar
-            mode="single"
-            selected={selectedDate}
-            onSelect={setSelectedDate}
-          />
-        </div>
-
-        <div>
           <h2 className="text-lg font-semibold mb-2">Book Type</h2>
-          <Select onValueChange={setBookType}>
+          <Select value={bookType} onValueChange={setBookType}>
             <SelectTrigger>
               <SelectValue placeholder="Select type" />
             </SelectTrigger>
@@ -157,7 +168,7 @@ export default function AllBooks() {
 
         <div>
           <h2 className="text-lg font-semibold mb-2">Sort By</h2>
-          <Select onValueChange={setSortBy}>
+          <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger>
               <SelectValue placeholder="Select sorting" />
             </SelectTrigger>
@@ -169,71 +180,60 @@ export default function AllBooks() {
             </SelectContent>
           </Select>
         </div>
-      </div>
+      </aside>
 
-      {/* Book Cards */}
-      <div className="flex flex-wrap justify-center gap-4 w-full">
-        {filteredBooks.map((book, index) => (
-          <Card
-            key={`${book.id}-${index}`}
-            onClick={() => navigate(`/books/${book.id}`)}
-            className="rounded-2xl shadow-md border w-full sm:w-[200px] md:w-[250px] lg:w-[280px] hover:shadow-lg transition duration-300 height-[400px]"
-          >
-            <img
-              src={book.thumbnail}
-              alt={book.title}
-              className="w-full object-cover rounded-t-2xl"
-            />
-            <CardContent className="p-4">
-              <h3 className="text-lg font-semibold">{book.title}</h3>
-              <p className="text-sm text-muted-foreground mb-1">${book.price}</p>
-              <p className="text-sm text-gray-700">{book.type}</p>
-              <p className="text-sm text-gray-600">By {book.author}</p>
-              <div className="flex items-center gap-1 my-1">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill={i < book.rating ? "currentColor" : "none"}
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className={`w-4 h-4 ${
-                      i < book.rating ? "text-yellow-400" : "text-gray-300"
-                    }`}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.073 6.374h6.708c.969 0 1.371 1.24.588 1.81l-5.423 3.938 2.073 6.374c.3.921-.755 1.688-1.54 1.118l-5.423-3.938-5.423 3.938c-.785.57-1.84-.197-1.54-1.118l2.073-6.374-5.423-3.938c-.783-.57-.38-1.81.588-1.81h6.708l2.073-6.374z"
-                    />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-xs text-gray-500">
-                Published on: {format(book.date, "yyyy-MM-dd")}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
-
-        {/* <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination> */}
-      </div>
+      {/* Books Display */}
+      <section className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredBooks.length > 0 ? (
+          filteredBooks.map((book) => (
+            <Card
+              key={book.id}
+              onClick={() => navigate(`/books/${book.id}`)}
+              className="rounded-2xl shadow hover:shadow-lg cursor-pointer transition-all duration-300"
+            >
+              <img
+                src={book.thumbnail}
+                alt={book.title}
+                className="w-full h-48 object-cover rounded-t-2xl"
+              />
+              <CardContent className="p-4 space-y-1">
+                <h3 className="text-lg font-semibold">{book.title}</h3>
+                <p className="text-sm text-gray-500"> NPR {book.price}</p>
+                <p className="text-sm text-muted-foreground">{book.type}</p>
+                <p className="text-sm text-gray-600">By {book.author}</p>
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill={i + 1 <= book.rating ? "currentColor" : "none"}
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className={`w-4 h-4 ${
+                        i + 1 <= book.rating ? "text-yellow-400" : "text-gray-300"
+                      }`}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1}
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.073 6.374h6.708c.969 0 1.371 1.24.588 1.81l-5.423 3.938 2.073 6.374c.3.921-.755 1.688-1.54 1.118l-5.423-3.938-5.423 3.938c-.785.57-1.84-.197-1.54-1.118l2.073-6.374-5.423-3.938c-.783-.57-.38-1.81.588-1.81h6.708l2.073-6.374z"
+                      />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500">
+                  Published on: {format(book.date, "yyyy-MM-dd")}
+                </p>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <div className="col-span-full text-center text-muted-foreground py-10">
+            No books match the selected filters.
+          </div>
+        )}
+      </section>
     </div>
   );
 }

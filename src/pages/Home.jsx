@@ -93,25 +93,16 @@ const Home = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="bg-[#636AE8] text-white py-16 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated with BookMate</h2>
-          <p className="mb-6">Get emails about new releases, discounts, and curated lists. No spam.</p>
-          <form className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="w-full sm:w-2/3 px-4 py-2 rounded text-gray-900"
-            />
-            <button
-              type="submit"
-              className="bg-white text-[#636AE8] px-6 py-2 rounded font-medium hover:bg-indigo-100 transition"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
+<section className="bg-[#636AE8] text-white py-20 px-6">
+  <div className="max-w-4xl mx-auto text-center">
+    <h2 className="text-4xl font-extrabold mb-4 leading-tight">Stay in the Loop with <span className="underline decoration-white/30">BookMate</span></h2>
+    <p className="mb-8 text-lg opacity-90">
+      Be the first to know about fresh arrivals, exclusive discounts, and curated picks. No spam, we promise!
+    </p>
+    
+  </div>
+</section>
+
     </div>
   );
 };

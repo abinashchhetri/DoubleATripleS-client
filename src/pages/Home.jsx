@@ -81,7 +81,20 @@ const Home = () => {
               {
                 name: "Sahil",
                 quote: "User-friendly, affordable, and great book curation. What else do you need?",
-              }
+              },
+              {
+                name: "Sukarma",
+                quote: "User-friendly, affordable, and great book curation. What else do you need?",
+              },
+              {
+                name: "Amrit",
+                quote: "User-friendly, affordable, and great book curation. What else do you need?",
+              },
+              {
+                name: "Ram",
+                quote: "User-friendly, affordable, and great book curation. What else do you need?",
+              },
+
             ].map((t, idx) => (
               <div key={idx} className="bg-indigo-50 p-6 rounded-lg shadow hover:shadow-md transition">
                 <p className="text-gray-700 italic mb-4">“{t.quote}”</p>

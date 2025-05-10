@@ -38,7 +38,9 @@ const Login = () => {
       
       // Redirect based on role
       if (res.data.token) {
-        const decodedToken = decodeJwt(res.data.token); // Function to decode JWT
+        const decodedToken = decodeJwt(res.data.token); 
+        
+        console.log( "decodedToken =" , decodedToken)// Function to decode JWT
         if (decodedToken.role === "Admin") {
           navigate("/admin");
         } else {
